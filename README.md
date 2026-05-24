@@ -19,6 +19,9 @@
     * `DelaySeconds` - How long to wait for the app to start (in seconds)
 * An example would be the **GCC** application for **AERO** graphic cards to apply settings that are not remembered from last session.
     * Full path: `C:\Program Files\GIGABYTE\Control Center\LaunchGCC.exe`
+* Your first time running use the `--task` switch to add it to *Window's* **TaskScheduler**.
+    * The app will automatically check if the task exists and if not, it will create it for you. 
+        * Equivalent to: `schtasks /create /tn "YourAppName AutoStart" /sc onlogon /tr "C:\Path\To\Application.exe" /rl highest /ru "%USERNAME%" /f`
 * I've also included a helpful `ScheduledTaskHelper` class that can be used to create a scheduled task to run any application on startup.
 
 ## 🧾 License/Warranty
