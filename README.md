@@ -2,13 +2,11 @@
 
 ## 💻 Console - LaunchThenClose
 
-
 **Dependencies**
 
 | Assembly | Version |
 | ---- | ---- |
 | .NET | 4.8 |
-
 
 ### 📝 v1.0.0.0 - May 2026
 
@@ -23,6 +21,8 @@
     * The app will automatically check if the task exists and if not, it will create it for you. 
         * Equivalent to: `schtasks /create /tn "YourAppName AutoStart" /sc onlogon /tr "C:\Path\To\Application.exe" /rl highest /ru "%USERNAME%" /f`
 * I've also included a helpful `ScheduledTaskHelper` class that can be used to create a scheduled task to run any application on startup.
+
+![Example](./Screenshot.png)
 
 ## 🧾 License/Warranty
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish and distribute copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
