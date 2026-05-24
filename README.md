@@ -11,7 +11,7 @@
 ### 📝 v1.0.0.0 - May 2026
 
 * A helper utility that can launch an application on startup and then close it.
-* There are 3 config settings that can be adjusted in the Settings.xml file:
+* There are 3 config settings that can be adjusted in the `Settings.xml` file:
     * `LaunchPath` - The full path of the process to start
     * `ProcessToKill` - The process name to kill once started
     * `DelaySeconds` - How long to wait for the app to start (in seconds)
