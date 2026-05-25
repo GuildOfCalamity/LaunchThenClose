@@ -22,6 +22,7 @@
         * Equivalent to: `schtasks /create /tn "YourAppName AutoStart" /sc onlogon /tr "C:\Path\To\Application.exe" /rl highest /ru "%USERNAME%" /f`
 * To remove the task just run again with `--task false`.
 * I've also included a helpful `ScheduledTaskHelper` class that can be used to create a scheduled task to run any application on startup.
+* If you do not wish to use the *Window's* **TaskScheduler**, you could add the full app path to the registry under `\HKCU\Software\Microsoft\Windows\CurrentVersion\Run`.
 
 ![Example](./Screenshot.png)
 
