@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace LaunchThenClose
 {
@@ -23,9 +22,10 @@ namespace LaunchThenClose
 
             Logger.Write($"🔔 CurrentUserSID returns \"{ScheduledTaskHelper.GetCurrentUserSid()}\"", level: LogLevel.Debug);
            
+            _ = DetectIfRegistryStart();
             LogDomainAssemblies();
 
-            #region [Exception Events]
+            #region [Event Hooks]
             AppDomain.CurrentDomain.FirstChanceException += (sender, e) =>
             {
                 if (e.Exception != null &&
@@ -47,6 +47,8 @@ namespace LaunchThenClose
                 Console.WriteLine($"🔔 Press any key to close.");
                 _ = Console.ReadKey();
             };
+            
+            ConfigManager.OnError += OnConfigError;
             #endregion
 
             var trust = AppDomain.CurrentDomain.ApplicationTrust;
@@ -122,8 +124,6 @@ namespace LaunchThenClose
 
                 }
             }
-
-            ConfigManager.OnError += OnConfigError;
 
             Console.WriteLine($"🔔 Reading local config…");
             _launchPath = ConfigManager.Get("LaunchPath", defaultValue: @"C:\Program Files\GIGABYTE\Control Center\LaunchGCC.exe");
@@ -223,6 +223,17 @@ namespace LaunchThenClose
         }
 
         #region ◁ Helpers ▷
+        static bool DetectIfRegistryStart()
+        {
+            if (Directory.GetCurrentDirectory().ToLower().Contains("windows\\system32"))
+            {
+                string exeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                Directory.SetCurrentDirectory(exeDir);
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Gets the assemblies loaded in the current execution context of the application domain.
         /// </summary>
